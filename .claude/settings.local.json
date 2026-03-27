@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"../venv/Scripts/python.exe\" test_all_guardrails.py)",
+      "Bash(git -C \"C:/Users/91828/Desktop/llmguard\" log --oneline -5)",
+      "Bash(git -C \"C:/Users/91828/Desktop/llmguard\" rev-parse --show-toplevel)"
+    ]
+  }
+}
