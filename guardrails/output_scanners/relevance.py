@@ -14,7 +14,7 @@ logger = logging.getLogger("guardrails")
 
 # Model configuration
 DEFAULT_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-DEFAULT_THRESHOLD = 0.5
+DEFAULT_THRESHOLD = 0.65
 
 # Get the directory where this file is located, then go up to llmguard
 _CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))

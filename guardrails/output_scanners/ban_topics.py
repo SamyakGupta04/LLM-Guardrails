@@ -31,7 +31,7 @@ logger = logging.getLogger("guardrails")
 # =============================================================================
 
 # Default Thresholds
-DEFAULT_THRESHOLD = 0.60       # Base threshold for topic similarity
+DEFAULT_THRESHOLD = 0.75       # Base threshold for topic similarity
 HIGH_CONFIDENCE_THRESHOLD = 0.75 # Threshold for purely semantic matches
 
 # 1. BANNED TOPICS (Broad Categories)
@@ -180,7 +180,7 @@ def detect_banned_topics(
             reason = f"Matching intent: '{best_intent}' (Score: {max_intent_score:.2f} > {effective_threshold:.2f})"
         
         # Case C: Combined Context (Topic + Intent both reasonable)
-        elif max_topic_score > 0.6 and max_intent_score > 0.55:
+        elif max_topic_score > 0.75 and max_intent_score > 0.65:
             is_banned = True
             reason = f"Combined Context: Topic '{best_topic}' ({max_topic_score:.2f}) + Intent '{best_intent}' ({max_intent_score:.2f})"
 

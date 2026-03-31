@@ -29,6 +29,7 @@ _NUM_DATE_RE = re.compile(
       | \b\d+(?:\.\d+)?\s?%                  # 12%, 12.5%
       | (?:Rs\.?|₹|\$|€|£)\s?\d{1,3}(?:,\d{3})*(?:\.\d+)?  # Currency
       | \b\d{1,3}(?:,\d{3})+(?:\.\d+)?\b     # 1,234,567.89
+      | \b\d{1,2}(?:,\d{2})+(?:,\d{3})(?:\.\d+)?\b  # Indian Lakh/Crore: 1,23,45,678.90
       | \b\d+(?:\.\d+)?\b                    # 123, 12.5
     )
     """,
@@ -756,7 +757,8 @@ class FactualConsistencyScanner:
         
         # Check number matching
         if self.require_numbers_match:
-            match, missing = _numbers_match(claim, best_evidence.text)
+            full_context = " ".join([e.text for e in evidence_index])
+            match, missing = _numbers_match(claim, full_context)
             if not match:
                 return ClaimCheck(
                     claim=claim,
@@ -768,7 +770,8 @@ class FactualConsistencyScanner:
         
         # Check entity matching
         if self.require_entities_match:
-            match, missing = _entities_match(claim, best_evidence.text)
+            full_context = " ".join([e.text for e in evidence_index])
+            match, missing = _entities_match(claim, full_context)
             if not match:
                 return ClaimCheck(
                     claim=claim,
